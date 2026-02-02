@@ -1,0 +1,14 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer white triangle (letter A) -->
+  <path d="M100 10 L190 180 L160 180 L100 65 L40 180 L10 180 Z" fill="white"/>
+  <!-- Inner cutout (dark) -->
+  <path d="M100 65 L130 135 L70 135 Z" fill="#0D1B2A"/>
+  <!-- Cyan/mint inner triangle -->
+  <path d="M100 90 L120 130 L80 130 Z" fill="url(#mintGradient)"/>
+  <defs>
+    <linearGradient id="mintGradient" x1="100" y1="90" x2="100" y2="130" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7FE0D0"/>
+      <stop offset="100%" stop-color="#5BBFAA"/>
+    </linearGradient>
+  </defs>
+</svg>

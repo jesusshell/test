@@ -1,0 +1,79 @@
+.integrations {
+  background: var(--color-bg-secondary);
+}
+
+.integrations-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.integration-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 16px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: all var(--transition-normal);
+}
+
+.integration-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.integration-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: rgba(127, 224, 208, 0.1);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.integration-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.integrations-note {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.integrations-note p {
+  display: inline-block;
+  padding: 12px 24px;
+  background: rgba(127, 224, 208, 0.1);
+  border-radius: 100px;
+  font-size: 0.9375rem;
+  color: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .integrations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 400px) {
+  .integrations-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .integration-card {
+    padding: 16px 12px;
+  }
+}

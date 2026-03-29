@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>CUBE</title>
+
+    <!-- ES Module Shims for older browsers -->
+    <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.1/dist/es-module-shims.js"></script>
+
+    <!-- Import map for Three.js (required by model-viewer-effects) -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.min.js"
+        }
+    }
+    </script>
+
+    <!-- model-viewer (module build, without bundled Three.js) -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.2.0/dist/model-viewer-module.js"></script>
+
+    <!-- model-viewer-effects addon for postprocessing -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer-effects@1.5.0/dist/model-viewer-effects.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        model-viewer {
+            width: 800px;
+            height: 600px;
+            background-color: #ffffff;
+        }
+
+        #ar-prompt {
+            display: none;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-family: sans-serif;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .controls label {
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <model-viewer id="effectsViewer" src="cube.glb" camera-controls touch-action="pan-y" autoplay ar shadow-intensity="1">
+        <button slot="ar-button" id="ar-button">View in your space</button>
+
+        <effect-composer render-mode="quality">
+            <outline-effect color="blue" blend-mode="skip"></outline-effect>
+            <ssao-effect blend-mode="skip"></ssao-effect>
+            <glitch-effect blend-mode="skip"></glitch-effect>
+            <smaa-effect blend-mode="skip"></smaa-effect>
+            <bloom-effect blend-mode="skip"></bloom-effect>
+            <pixelate-effect granularity="5" blend-mode="skip"></pixelate-effect>
+            <color-grade-effect blend-mode="default"></color-grade-effect>
+        </effect-composer>
+
+        <div class="controls">
+            <div>
+                <input type="checkbox" id="outline">
+                <label for="outline">Outline Effect</label>
+            </div>
+            <div>
+                <input type="checkbox" id="ssao">
+                <label for="ssao">SSAO Effect</label>
+            </div>
+            <div>
+                <input type="checkbox" id="glitch">
+                <label for="glitch">Glitch Effect</label>
+            </div>
+            <div>
+                <input type="checkbox" id="smaa">
+                <label for="smaa">SMAA Effect</label>
+            </div>
+            <div>
+                <input type="checkbox" id="bloom">
+                <label for="bloom">Bloom Effect</label>
+            </div>
+            <div>
+                <input type="checkbox" id="pixelate">
+                <label for="pixelate">Pixelate Effect</label>
+            </div>
+            <div>
+                <input type="checkbox" id="colorgrade" checked>
+                <label for="colorgrade">Color Grade Effect</label>
+            </div>
+        </div>
+    </model-viewer>
+
+    <script type="module">
+        const effectsViewer = document.querySelector("model-viewer#effectsViewer");
+        const effects = effectsViewer.querySelector("effect-composer").children;
+        const inputs = effectsViewer.querySelectorAll("input");
+
+        for (let i = 0; i < effects.length; i++) {
+            inputs[i].addEventListener('change', (e) => {
+                effects[i].blendMode = e.target.checked ? 'default' : 'skip';
+            });
+        }
+    </script>
+</body>
+</html>
